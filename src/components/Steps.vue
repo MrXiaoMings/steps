@@ -153,7 +153,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   .step_container{
-    width: 1200px;
+    width: 1000px;
     margin: 150px auto;
     .step_row_data{
       min-height: 150px;

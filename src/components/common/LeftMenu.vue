@@ -1,8 +1,8 @@
 <template>
-  <div class="menu-container">
-    <ul>
+  <div class="menu-container" id="menu-container">
+    <ul id="ul-container">
       <template v-for="(item, index) in menuList">
-        <li @click="selectTag($event, item)" :key="index"><span class="point"></span>{{ item.meta.title }}</li>
+        <li @click="selectTag($event, item)" :key="index" :class="!index ? 'selectPoint' : ''"><span class="point"></span>{{ item.meta.title }}</li>
       </template>
     </ul>
   </div>
@@ -10,12 +10,17 @@
 <script>
 import routerData from '@/router'
 export default {
-  created () {
-    console.log(routerData.options.routes[0].children)
-  },
   computed: {
     menuList () {
       return routerData.options.routes[0].children
+    }
+  },
+  mounted () {
+    this.onResize()
+    window.onresize = () => {
+      return (() => {
+        this.onResize()
+      })()
     }
   },
   data () {
@@ -29,6 +34,17 @@ export default {
       }
       console.log(e.target)
       e.target.classList.add('selectPoint')
+    },
+    onResize () {
+      const outerHeight = window.innerHeight
+      const menuHeight = document.getElementById('ul-container').clientHeight
+      console.log('menuHeight:', menuHeight)
+      if (outerHeight - menuHeight <= 0) {
+        return
+      }
+      const topValue = (outerHeight - menuHeight) / 2
+      document.getElementById('ul-container').style.marginTop = topValue + 'px'
+      document.getElementById('ul-container').style.transition = 'all .8s ease-in-out'
     }
   }
 }
@@ -38,6 +54,7 @@ export default {
     height: 100%;
     ul{
       list-style: none;
+      padding-left: 100px;
       li{
         padding: 10px 0 10px 0;
         font-size: 14px;
@@ -45,13 +62,13 @@ export default {
         cursor: pointer;
         .point{
           display: inline-block;
-          width: 6px;
-          height: 6px;
-          border-radius: 100%;
+          width: 8px;
+          height: 8px;
+          border-radius: 4px;
           background: red;
           position: absolute;
           left: -12px;
-          top: 17px;
+          top: 14px;
           cursor: pointer;
         }
       }
@@ -59,11 +76,11 @@ export default {
         transition: all .2s ease-in-out;
         .point{
           transition: all .4s ease-in-out;
-          transform: scale(1.5);
+          transform: scale(1.3);
           /*width: 8px;*/
           /*height: 8px;*/
           background: green;
-          top: 16px;
+          top: 14px;
         }
         font-weight: bolder;
       }
