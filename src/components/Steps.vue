@@ -9,12 +9,9 @@
           <input v-else type="text" ref="step_explain" @keyup="(e) =>explainEnter(e.keyCode, index)" v-model="stepNum.step_title" @blur="() => stepNum.step_explain = false" class="step_explain">
         </div>
         <div class="step_column_data">
-          <div class="step_line"></div>
           <div class="step_num">
             {{stepNum.step_num}}
           </div>
-        </div>
-        <div class="step_column_data">
           <el-tag
             v-for="(tag, index1) in stepNum.tags"
             closable
@@ -53,7 +50,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'Steps',
   data () {
     return {
       stepNums: [
@@ -122,7 +119,6 @@ export default {
     },
     handleClose (tag, index, index1) {
       this.stepNums[index].tags.splice(index1, 1)
-      this.checkHeight(index, false)
     },
     showTimeInput (index) {
       this.stepNums[index].timeInputVisible = true
@@ -141,23 +137,6 @@ export default {
       this.$nextTick(_ => {
         this.$refs.saveTagInput[0].$refs.input.focus()
       })
-      this.checkHeight(index, true)
-    },
-    checkHeight (index, isAdd = true) {
-      let currentRow = document.getElementsByClassName('step_row_data')[index]
-      const currentRowHeight = currentRow.clientHeight
-      const currentThree = currentRow.getElementsByClassName('step_column_data')[2]
-      const tagsHeight = currentThree.clientHeight
-      if (isAdd && (tagsHeight < currentRowHeight)) {
-        return
-      }
-      if (tagsHeight >= 150) {
-        currentRow.style.height = tagsHeight + 'px'
-        currentRow.getElementsByClassName('step_line')[0].style.height = tagsHeight + 'px'
-      } else {
-        currentRow.style.height = '150px'
-        currentRow.getElementsByClassName('step_line')[0].style.height = '150px'
-      }
     },
     handleInputConfirm (index) {
       let inputValue = this.stepNums[index].inputValue
@@ -166,7 +145,6 @@ export default {
       }
       this.stepNums[index].inputVisible = false
       this.stepNums[index].inputValue = ''
-      this.checkHeight(index, true)
     }
   }
 }
@@ -186,7 +164,7 @@ export default {
       }
       .step_column_data:nth-child(1){
         margin-right: 20px;
-        padding-top: 20px;
+        padding-top: 18px;
         width: 150px;
         text-align: right;
         span:hover{
@@ -200,13 +178,28 @@ export default {
           border-bottom: 1px solid cornflowerblue;
         }
       }
-      .step_column_data:nth-child(3){
-        margin-left: 20px;
+      .step_column_data:nth-child(2){
+        margin-left: 10px;
+        padding-left: 20px;
         padding-top: 15px;
-        overflow: hidden;
         width: 500px;
         padding-bottom: 30px;
         position: relative;
+        min-height: 150px;
+        border-left: 2px solid red;
+        .step_num{
+          width: 20px;
+          height: 20px;
+          box-sizing: border-box;
+          border-radius: 10px;
+          text-align: center;
+          line-height: 20px;
+          background: #FFFFFF;
+          border: 1px solid lightgray;
+          position: absolute;
+          top: 20px;
+          left: -11px;
+        }
         .step_time{
           position: absolute;
           bottom: 0;
@@ -225,8 +218,8 @@ export default {
           }
         }
         /*.step_time:hover{*/
-          /*cursor: pointer;*/
-          /*color: cornflowerblue;*/
+        /*cursor: pointer;*/
+        /*color: cornflowerblue;*/
         /*}*/
         span{
           float: left;
@@ -242,34 +235,12 @@ export default {
           margin-bottom: 15px;
         }
       }
-      .step_column_data:nth-child(2){
-        padding-top: 0;
-        min-height: 150px;
-        position: relative;
-        .step_line{
-          min-height: 150px;
-          width: 2px;
-          background: blue;
-        }
-        .step_num{
-          position: absolute;
-          top: 20px;
-          left: -10px;
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          text-align: center;
-          line-height: 20px;
-          background: white;
-          border: 1px solid lightgrey;
-        }
-      }
     }
     .input-new-tag{
       max-width: 150px;
     }
     .addStep, .decreaseStep{
-      width: 186px;
+      width: 196px;
       text-align: right;
       margin-top: 10px;
       i{
