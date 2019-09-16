@@ -1,28 +1,38 @@
 <template>
   <div id="app">
-    <!--<img src="./assets/logo.png">-->
-    <Steps/>
+    <div class="left-content">
+      <LeftMenu></LeftMenu>
+    </div>
+    <div class="right-content">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import Steps from './components/Steps'
+import LeftMenu from './components/common/LeftMenu'
 
 export default {
-  name: 'App',
   components: {
-    Steps
+    LeftMenu
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /*text-align: center;*/
   color: #2c3e50;
-  margin-top: 60px;
+  overflow: hidden;
+  .left-content{
+    float: left;
+    height: 100%;
+  }
+  .right-content{
+    float: right;
+  }
 }
 </style>

@@ -50,7 +50,7 @@
 
 <script>
 export default {
-  name: 'Steps',
+  name: 'MSteps',
   data () {
     return {
       stepNums: [
