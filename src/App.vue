@@ -13,10 +13,7 @@
 import LeftMenu from './components/common/LeftMenu'
 
 export default {
-  mounted () {
-    const outHeight = document.body.clientHeight
-    let leftEl = document.getElementsByClassName('left-content')[0]
-    leftEl.style.height = outHeight + 'px'
+  methods: {
   },
   components: {
     LeftMenu
@@ -43,7 +40,10 @@ export default {
     padding-right: 10px;
   }
   .right-content{
-    float: right;
+    box-sizing: border-box;
+    padding-left: 100px;
+    float: left;
+    min-width: 1000px;
   }
 }
 </style>

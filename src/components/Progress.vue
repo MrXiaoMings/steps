@@ -9,6 +9,14 @@
   </div>
 </template>
 <script>
+/*
+   params:{
+     height: 进度条高度
+     bgStartColor: 进度条渐变开始颜色
+     bgEndColor: 进度条渐变结束颜色
+     percent: 进度
+   }
+    */
 export default {
   name: 'MProgress',
   props: {
@@ -72,7 +80,7 @@ export default {
     width: 100%;
     min-height: 15px;
     .percent-include{
-      width: calc(100% - 50px);
+      width: calc(100% - 60px);
       background: #EBEBEB;
       overflow: hidden;
       position: relative;
@@ -95,6 +103,7 @@ export default {
       display: inline-block;
       vertical-align: middle;
       padding-left: 2px;
+      font-size: 12px;
     }
   }
 </style>

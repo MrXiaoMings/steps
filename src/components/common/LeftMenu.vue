@@ -16,12 +16,17 @@ export default {
     }
   },
   mounted () {
-    this.onResize()
     window.onresize = () => {
-      return (() => {
-        this.onResize()
-      })()
+      this.onResize()
+      this.onAppResize()
     }
+    const selectIndex = this.$route.meta.index
+    for (let i = 0; i < document.getElementsByClassName('selectPoint').length; i++) {
+      document.getElementsByClassName('selectPoint')[i].classList.remove('selectPoint')
+    }
+    document.getElementById('ul-container').getElementsByTagName('li')[selectIndex].classList.add('selectPoint')
+    this.onResize()
+    this.onAppResize()
   },
   data () {
     return {
@@ -32,8 +37,15 @@ export default {
       for (let i = 0; i < document.getElementsByClassName('selectPoint').length; i++) {
         document.getElementsByClassName('selectPoint')[i].classList.remove('selectPoint')
       }
-      console.log(e.target)
       e.target.classList.add('selectPoint')
+      this.$router.push({ name: val.name })
+    },
+    onAppResize () {
+      const outHeight = window.innerHeight
+      let leftEl = document.getElementsByClassName('left-content')[0]
+      let rightEl = document.getElementsByClassName('right-content')[0]
+      leftEl.style.height = outHeight + 'px'
+      rightEl.style.minHeight = outHeight + 'px'
     },
     onResize () {
       const outerHeight = window.innerHeight
