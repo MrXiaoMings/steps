@@ -3,7 +3,7 @@ import Router from 'vue-router'
 // import App from '../App.vue'
 import Index from '../components/common/index'
 import Steps from '../components/Steps.vue'
-import Progress from '../components/Progress'
+import Progress from '../views/progress/index'
 
 Vue.use(Router)
 const router = new Router({
@@ -22,7 +22,8 @@ const router = new Router({
           name: 'Steps',
           component: Steps,
           meta: {
-            title: '步骤条'
+            title: '步骤条',
+            index: 0
           }
         },
         {
@@ -30,7 +31,8 @@ const router = new Router({
           name: 'Progress',
           component: Progress,
           meta: {
-            title: '进度条'
+            title: '进度条',
+            index: 1
           }
         }
       ]
