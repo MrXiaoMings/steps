@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import LeftMenu from './components/common/LeftMenu'
+import LeftMenu from './components/common/LeftMenu.vue'
 
 export default {
   methods: {
