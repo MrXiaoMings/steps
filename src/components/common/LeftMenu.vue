@@ -1,9 +1,7 @@
 <template>
   <div class="menu-container" id="menu-container">
     <ul id="ul-container">
-      <template v-for="(item, index) in menuList">
-        <li @click="selectTag($event, item)" :key="index" :class="!index ? 'selectPoint' : ''"><span class="point"></span>{{ item.meta.title }}</li>
-      </template>
+      <li v-for="(item, index) in menuList" @click="selectTag($event, item)" :key="index" :class="!index ? 'selectPoint' : ''"><span class="point"></span>{{ item.meta.title }}</li>
     </ul>
   </div>
 </template>

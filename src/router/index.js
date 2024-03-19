@@ -4,6 +4,7 @@ import Router from 'vue-router'
 import Index from '../components/common/index'
 import Steps from '../components/Steps.vue'
 import Progress from '../views/progress/index'
+import JsonToTable from '../views/jsonToTable/formatJson.vue'
 
 Vue.use(Router)
 const router = new Router({
@@ -33,6 +34,15 @@ const router = new Router({
           meta: {
             title: '进度条',
             index: 1
+          }
+        },
+        {
+          path: 'mingComponents/JsonToTable',
+          name: 'JsonToTable',
+          component: JsonToTable,
+          meta: {
+            title: 'json解析',
+            index: 2
           }
         }
       ]
