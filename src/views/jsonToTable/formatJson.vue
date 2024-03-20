@@ -50,11 +50,17 @@ export default {
                     let indexObj = {}
                     indexObj.prop = i
                     indexObj.type = this.$proxy._typeof(o)
-                    indexObj.value = 'Object'
-                    indexObj.level = level
-                    indexObj.isShow = false
-                    tmpArr.push(indexObj)
-                    indexObj.children = this.formatDataToArr(o, level + 1)
+                    if (indexObj.type === 'object') {
+                        indexObj.value = 'Object'
+                        indexObj.level = level
+                        indexObj.isShow = false
+                        tmpArr.push(indexObj)
+                        indexObj.children = this.formatDataToArr(o, level + 1)
+                    } else {
+                        indexObj.value = o
+                        indexObj.level = level
+                        tmpArr.push(indexObj)
+                    }
                 })
             } else {
                 Object.keys(obj).map(k => {
@@ -71,6 +77,10 @@ export default {
                     } else if (tmpObj.type === 'object') {
                         tmpObj.children = this.formatDataToArr(tmpObj.value, level + 1)
                         tmpObj.value = 'Object'
+                        tmpObj.isShow = false
+                    } else if (tmpObj.type === 'array' && tmpObj.value.length && this.$proxy._typeof(tmpObj.value[0]) === 'string') {
+                        tmpObj.children = this.formatDataToArr(tmpObj.value, level + 1)
+                        tmpObj.value = 'Array'
                         tmpObj.isShow = false
                     }
                     tmpArr.push(tmpObj)
